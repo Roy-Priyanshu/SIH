@@ -10,7 +10,7 @@
 }
 .choice-form {
   width: 1059px;
-  height: 998px;
+  height: 1033px;
   display: flex;
   position: relative;
   box-shadow: 5px 5px 10px 0px #464242;
@@ -118,4 +118,32 @@
 .choice-button4:hover {
   color: #efe8e8;
   background-color: #040e48;
+}
+.choice-textinput {
+  left: 98px;
+  width: 738px;
+  bottom: 101px;
+  height: 37px;
+  position: absolute;
+}
+.choice-text1 {
+  left: 99px;
+  width: 530px;
+  bottom: 140px;
+  height: 91px;
+  position: absolute;
+  font-size: 110%;
+  font-family: Noto Sans;
+  font-weight: 500;
+}
+.choice-button5 {
+  right: 139px;
+  bottom: 37px;
+  position: absolute;
+  transition: 0.3s;
+  padding-bottom: var(--dl-space-space-halfunit);
+}
+.choice-button5:hover {
+  color: #f5f3f3;
+  background-color: #071962;
 }

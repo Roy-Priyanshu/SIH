@@ -339,25 +339,62 @@ X_tfidf = tfidf_vectorizer.fit_transform(X)
 classifier = MultinomialNB()
 classifier.fit(X_tfidf, y)
 
+
+# def retrain_model(user_input, category_label):
+#     # Load the existing dataset
+#     divorce_dataset_df = pd.read_csv('legal_dataset.csv')
+#     print(len(legal_dataset_df))
+#     # Append user input to the dataset
+#     new_row = {'Text': user_input, 'Category': category_label}
+#     divorce_dataset_df = divorce_dataset_df.append(new_row, ignore_index=True)
+
+#     # Extract features and labels
+#     X = divorce_dataset_df['Text']
+#     y = divorce_dataset_df['Category']
+
+#     # Convert text data to TF-IDF features
+#     tfidf_vectorizer = TfidfVectorizer()
+#     X_tfidf = tfidf_vectorizer.fit_transform(X)
+
+#     # Train a Multinomial Naive Bayes classifier
+#     classifier = MultinomialNB()
+#     classifier.fit(X_tfidf, y)
+
+#      # Save the updated dataset to the CSV file
+#     divorce_dataset_df.to_csv('legal_dataset.csv', index=False)
+#     print(len(divorce_dataset_df))
+#     return classifier, tfidf_vectorizer
+
+
+# Function to retrain the model and update the CSV file
+def retrain_model(user_input, category_label, csv_filename):
+    # Load the existing dataset from the CSV file
+    divorce_dataset_df = pd.read_csv(csv_filename)
+    print("Before appending:", len(divorce_dataset_df))
+
+    # Append user input to the dataset
+    new_row = {'Text': user_input, 'Category': category_label}
+    divorce_dataset_df = divorce_dataset_df.append(new_row, ignore_index=True)
+
+    # Save the updated dataset to the CSV file
+    divorce_dataset_df.to_csv(csv_filename, index=False)
+    print("After appending:", len(divorce_dataset_df))
+
 def classify_text(user_input):
     # Preprocess and tokenize user input
     user_input_tfidf = tfidf_vectorizer.transform([user_input])
-
+    print("length",len(divorce_dataset_df))
     # Predict the category of user input
+    
     predicted_category = classifier.predict(user_input_tfidf)
-
+    print(predicted_category)
+    # Retrain the model and update the CSV file
+    retrain_model(user_input, predicted_category, 'legal_dataset.csv')
+   # Retrain the model
+    # classifier, tfidf_vectorizer = retrain_model(user_input, predicted_category)
     return predicted_category[0]
 
-# # User input
-# user_input = input("Enter your statement: ")
 
-# # Preprocess and tokenize user input
-# user_input_tfidf = tfidf_vectorizer.transform([user_input])
-
-# # Predict the category of user input
-# predicted_category = classifier.predict(user_input_tfidf)
-
-# print("Predicted Category:", predicted_category[0])
 
 
 # In[ ]:
